@@ -1,10 +1,13 @@
 package com.example.recycler_view_examp
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recycler_view_examp.databinding.FragmentFirstBinding
 
@@ -23,6 +26,9 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.recycleView.layoutManager = LinearLayoutManager(activity)
+        val adapter = NameAdapter(requireActivity(),getStudentName())
+        binding.recycleView.adapter = adapter
     }
 
     override fun onDestroyView() {
@@ -66,27 +72,24 @@ class FirstFragment : Fragment() {
         )
         return nameList
     }
-    class NameAdapter(val studentList: List<String>):RecyclerView.Adapter<NameAdapter.NameHolderr>(){
-        class NameHolder(val view:View):RecyclerView.ViewHolder(view) {
-
-        }
+    class NameAdapter(val context: Context, val studentList: List<String>):RecyclerView.Adapter<NameAdapter.NameHolderr>(){
 
         class NameHolderr(val view: View):RecyclerView.ViewHolder(view) {
-
+            val stdName:TextView = view.findViewById(R.id.txtStudentName)
         }
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NameHolderr {
-            TODO("Not yet implemented")
+            val layout = LayoutInflater.from(context).inflate(R.layout.single_row_student,parent,false)
+            return NameHolderr(layout)
         }
 
         override fun onBindViewHolder(holder: NameHolderr, position: Int) {
-            TODO("Not yet implemented")
+            val name = studentList[position]
+            holder.stdName.text = name
         }
 
         override fun getItemCount(): Int {
-            TODO("Not yet implemented")
+            return studentList.size
         }
-
 
     }
 }
