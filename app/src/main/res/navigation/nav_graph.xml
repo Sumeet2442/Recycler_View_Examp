@@ -9,9 +9,4 @@
         android:name="com.example.recycler_view_examp.FirstFragment"
         android:label="fragment_first"
         tools:layout="@layout/fragment_first" />
-    <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.example.recycler_view_examp.SecondFragment"
-        android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
 </navigation>
